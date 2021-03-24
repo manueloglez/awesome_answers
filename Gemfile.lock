@@ -66,6 +66,7 @@ GEM
     builder (3.2.4)
     byebug (11.1.3)
     concurrent-ruby (1.1.8)
+    cowsay (0.3.0)
     crass (1.0.6)
     erubi (1.10.0)
     ffi (1.15.0)
@@ -178,6 +179,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
+  cowsay
   jbuilder (~> 2.7)
   listen (~> 3.3)
   pg (~> 1.1)
