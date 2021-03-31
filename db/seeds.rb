@@ -6,6 +6,7 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
+Answer.delete_all
 Question.delete_all
 
 200.times do
@@ -15,13 +16,19 @@ Question.delete_all
   # that will create fake data. No need to require the faker gem at the
   # top of this script because we can access all gems in the Gemfile
   # from anywhere.
-  Question.create(
+  q = Question.create(
     title: Faker::Hacker.say_something_smart,
     body: Faker::ChuckNorris.fact,
     view_count: rand(100_000),
     created_at: created_at,
     updated_at: created_at,
   )
+  if q.valid?
+    q.answers = rand(0..15).times.map do
+      Answer.new(body: Faker::GreekPhilosophers.quote)
+    end
+  end
 end
 
 puts Cowsay.say("Generated #{Question.count} questions", :koala)
+puts Cowsay.say("Generated #{Answer.count} answers", :stegosaurus)

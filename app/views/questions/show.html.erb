@@ -28,8 +28,35 @@
   <p>
     <%= link_to(
       'Delete', 
-      delete_question_path(@question), 
+      question_path(@question), 
       method: :delete,
       data: { confirm: 'Are you sure you want to delete this question?'})%>
   <p>
 </div>
+<h2><%= pluralize(@answers.count, 'answer') %></h2>
+<%= form_with model: [@question, @answer], local: true do |form| %>
+  <% if @answer.errors.present? %>
+    <p>
+      <%= @answer.errors.full_messages.join(', ') %>
+    </p>
+  <% end %>
+  <%= form.text_area(
+    :body,
+    cols: 50,
+    rows: 5,
+    placeholder: 'Provide an answer...'
+  ) %>
+  <%= form.submit :answer%>
+<% end %>
+<ul>
+  <% @answers.each do |answer| %>
+    <li>
+      <%= answer.body %>
+      <%= link_to(
+        'Delete', 
+        answer_path(answer), 
+        method: 'delete',
+        data: {confirm: 'Are you sure?'})%>
+    </li>
+  <% end %>
+</ul>
