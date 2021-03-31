@@ -18,6 +18,17 @@
     <%= link_to 'All Questions', questions_path %>
     -
     <%= link_to 'New Question', new_question_path %>
+    <% if user_signed_in? %>
+      Hello <%= current_user.full_name%>
+      <%= link_to 'Sign Out', session_path, method: :delete, data: {confirm: "Log out?" } %>
+    <% else %>
+      <%= link_to 'Sign in', new_session_path%>
+      <%= link_to 'Sign up', new_user_path%>
+    <% end %>
+    <hr>
+    <% flash.each do |type, message| %>
+      <%= message %>
+    <% end %>
     <%= yield %>
   </body>
 </html>

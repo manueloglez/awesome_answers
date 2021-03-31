@@ -4,14 +4,10 @@ Rails.application.routes.draw do
   get('/contact/new', { to: 'contact#new' })
   post('/contact', {to: 'contact#create'})
 
-  # post('/questions', {to: 'questions#create'})
-  # get('/questions/new', {to: 'questions#new'})
-  # get('/questions/:id', {to: 'questions#show', as: 'question'})
-  # get('/questions', {to: 'questions#index'})
-  # get('/questions/:id/edit', {to: 'questions#edit', as: 'edit_question'})
-  # patch('/questions/:id/', {to: 'questions#update', as: 'update_question'})
-  # delete('/questions/:id', {to: 'questions#destroy', as: 'delete_question'})
   resources :questions do
     resources :answers, only:[:create, :destroy], shallow: true
   end
+
+  resources :users, only: [:new, :create]
+  resource :session, only: [:new, :create, :destroy]
 end

@@ -8,6 +8,18 @@
 
 Answer.delete_all
 Question.delete_all
+User.delete_all
+
+PASSWORD = '123456'
+
+10.times do
+  User.create(
+    first_name: Faker::Name.first_name,
+    last_name: Faker::Name.last_name,
+    email: Faker::Internet.email,
+    password: PASSWORD
+  )
+end
 
 200.times do
   created_at = Faker::Date.backward(365 * 5)
@@ -32,3 +44,4 @@ end
 
 puts Cowsay.say("Generated #{Question.count} questions", :koala)
 puts Cowsay.say("Generated #{Answer.count} answers", :stegosaurus)
+puts Cowsay.say("Generated #{User.count} answers", :ghostbusters)
