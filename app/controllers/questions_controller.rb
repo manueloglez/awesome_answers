@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
   before_action :find_question, only: [:edit, :update, :show, :destroy]
+  before_action :authorize, only: [:edit, :update, :destroy]
   def new
     @question = Question.new
   end
@@ -41,5 +42,12 @@ class QuestionsController < ApplicationController
   end
   def find_question
     @question = Question.find(params[:id])
+  end
+
+  def authorize 
+    unless can?(:edit, @question)
+      flash[:primary] = "Not authorized"
+      redirect_to root_path
+    end
   end
 end

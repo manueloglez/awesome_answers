@@ -4,7 +4,9 @@ class AnswersController < ApplicationController
     @question = Question.find params[:question_id]
     @answer = Answer.new answer_params
     @answer.question = @question
+    @answer.user = current_user
     if @answer.save
+      flash[:primary] = "Answer written"
       redirect_to question_path(@question)
     else 
       render "questions/show"

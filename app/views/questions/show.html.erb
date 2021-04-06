@@ -11,6 +11,7 @@
 <p>
   Last edited <%= time_ago_in_words(@question.updated_at) %> ago
 </p>
+<% if can?(:edit, @question) %>
 <div>
   <%= link_to 'Edit', edit_question_path(@question) %>
   |
@@ -29,6 +30,7 @@
     ) 
   %>
 </div>
+<% end %>
 
 <h2><%= @answers.count %> Answers</h2>
 
@@ -59,6 +61,7 @@
     <li>
       <p>
         <%= answer.body %> <br>
+        <% if can?(:crud, answer) %>
         <small>
         <%= link_to(
           'Delete', 
@@ -68,6 +71,7 @@
         ) %>
         </small>
         -
+        <% end %>
         <small>
           Answered <%= time_ago_in_words(answer.created_at) %> ago by <%= answer.user&.full_name || "[deleted]" %>
         </small>
