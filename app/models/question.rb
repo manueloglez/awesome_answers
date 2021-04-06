@@ -1,5 +1,6 @@
 class Question < ApplicationRecord
   has_many :answers, dependent: :destroy
+  belongs_to :user
   # Active Record is known as an ORM, an Object Relational Mapper
   # We use objects to represent tables and data from our database.
   # This class "Question" represents the "questions" table.

@@ -6,7 +6,9 @@ class QuestionsController < ApplicationController
   end
   def create
     @question = Question.new(question_params)
+    @question.user = current_user
     if @question.save 
+      flash[:primary] = "#{@question.title} created"
       redirect_to question_path(@question.id)
     else
       render :new

@@ -13,3 +13,7 @@
  *= require_tree .
  *= require_self
  */
+
+ .home-image{
+   width: 300px;
+ }

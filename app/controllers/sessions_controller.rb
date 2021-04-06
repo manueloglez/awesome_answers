@@ -6,13 +6,16 @@ class SessionsController < ApplicationController
     user = User.find_by_email params[:email]
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-      redirect_to root_path, notice: 'Logged In'
+      flash[:primary] = "Welcome, #{user.full_name}"
+      redirect_to root_path
     else
+      flash[:info] = "Wrong email or password"
       render :new
     end
   end
 
   def destroy
+    flash[:primary] = "Signed Out"
     session[:user_id] = nil
     redirect_to root_path
   end
